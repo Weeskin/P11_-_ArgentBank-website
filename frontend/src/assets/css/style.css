@@ -251,39 +251,6 @@ html body #root .main .bg-dark {
   margin-right: 5px;
 }
 
-@media (min-width: 920px) {
-  .hero {
-    height: 400px;
-    background-position: 0% 33%;
-  }
-  .hero-content {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 300px;
-    margin: 2rem;
-  }
-  .hero-content .subtitle {
-    font-size: 1.5rem;
-  }
-  .hero-content .text {
-    font-size: 1.2rem;
-  }
-  .features {
-    flex-direction: row;
-  }
-}
-@media (min-width: 720px) {
-  .account {
-    flex-direction: row;
-  }
-  .account-content-wrapper.cta {
-    flex: 0;
-  }
-  .transaction-button {
-    width: 200px;
-  }
-}
 .footer {
   display: flex;
   justify-content: center;
@@ -293,6 +260,59 @@ html body #root .main .bg-dark {
 .footer .footer-text {
   margin: 0;
   padding: 0;
+}
+
+.bg-dark {
+  background-color: #12002b;
+  padding-top: 1px;
+  padding-bottom: 15vh;
+}
+.bg-dark .sign-in-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-top: 3rem;
+  padding: 2rem;
+}
+.bg-dark .sign-in-content .sign-in-icon {
+  font-size: 14px;
+}
+.bg-dark .sign-in-content .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.bg-dark .sign-in-content .input-wrapper label {
+  font-weight: bold;
+}
+.bg-dark .sign-in-content .input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.bg-dark .sign-in-content .input-remember {
+  display: flex;
+}
+.bg-dark .sign-in-content .input-remember label {
+  margin-left: 0.25rem;
+}
+.bg-dark .sign-in-content .sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  background-color: #00bc77;
+  color: #fff;
+  text-decoration: underline white;
+  cursor: pointer;
+  border: none;
+}
+.bg-dark .sign-in-content .error-message {
+  color: red;
 }
 
 /*# sourceMappingURL=style.css.map */
