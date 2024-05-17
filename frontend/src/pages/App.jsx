@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HomePage from "./homePage";
-import "../assets/style/main.css";
+import "../assets/css/style.css";
 
 export default function AppRouter() {
 	return (
