@@ -5,7 +5,6 @@ import Logo from "../assets/img/argentBankLogo.webp";
 export default function Navbar() {
 	return (
 		<header>
-			<h1 className="sr-only">Argent Bank</h1>
 			<nav className="main-nav">
 				<NavLink
 					to="/"
@@ -17,6 +16,18 @@ export default function Navbar() {
 						alt="Argent Bank Logo"
 					/>
 				</NavLink>
+				<div className="not-connected">
+					<NavLink
+						className="main-nav-item"
+						to="/login"
+					>
+						<i
+							className="fa fa-user-circle"
+							aria-hidden="true"
+						></i>
+						<p>Sign In</p>
+					</NavLink>
+				</div>
 			</nav>
 		</header>
 	);

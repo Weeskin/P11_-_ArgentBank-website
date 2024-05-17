@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/homePage";
-import ConnexionPage from "./pages/connexionPage";
-import Profile from "./pages/userPage";
+// import ConnexionPage from "./pages/connexionPage";
+// import Profile from "./pages/userPage";
+// import ErrorPage from "./pages/errorPage";
 import "./assets/css/style.css";
-import ErrorPage from "./pages/errorPage";
 
 export default function AppRouter() {
 	return (
@@ -16,7 +16,7 @@ export default function AppRouter() {
 					path="/"
 					element={<HomePage />}
 				/>
-				<Route
+				{/* <Route
 					path="/Login"
 					element={<ConnexionPage />}
 				/>
@@ -27,7 +27,7 @@ export default function AppRouter() {
 				<Route
 					path="*"
 					element={<ErrorPage />}
-				/>
+				/> */}
 			</Routes>
 			<Footer />
 		</Router>
