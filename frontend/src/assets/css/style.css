@@ -1,3 +1,39 @@
+html {
+  color: #2c3e50;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+html body {
+  margin: 0;
+}
+html body #root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+html body #root .main {
+  flex: 1;
+}
+html body #root .main .sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+  /* 3 */
+}
+html body #root .main .bg-dark {
+  background-color: #12002b;
+}
+
 .account {
   display: flex;
   justify-content: space-between;
@@ -83,40 +119,57 @@
     flex-direction: row;
   }
 }
-html {
-  color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
+.bg-dark {
+  background-color: #12002b;
+  padding-top: 1px;
+  padding-bottom: 15vh;
 }
-html body {
-  margin: 0;
+.bg-dark .sign-in-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-top: 3rem;
+  padding: 2rem;
 }
-html body #root {
+.bg-dark .sign-in-content .sign-in-icon {
+  font-size: 19px;
+}
+.bg-dark .sign-in-content .imput-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  text-align: left;
+  margin-bottom: 1rem;
 }
-html body #root .main {
-  flex: 1;
+.bg-dark .sign-in-content .imput-wrapper label {
+  font-weight: bold;
 }
-html body #root .main .sr-only {
-  border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  /* 1 */
-  -webkit-clip-path: inset(50%) !important;
-  clip-path: inset(50%) !important;
-  /* 2 */
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
-  white-space: nowrap !important;
-  /* 3 */
+.bg-dark .sign-in-content .imput-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
 }
-html body #root .main .bg-dark {
-  background-color: #12002b;
+.bg-dark .sign-in-content .input-remember {
+  display: flex;
+}
+.bg-dark .sign-in-content .input-remember label {
+  margin-left: 0.25rem;
+}
+.bg-dark .sign-in-content .sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  background-color: #00bc77;
+  color: #fff;
+  text-decoration: underline white;
+  cursor: pointer;
+  border: none;
+}
+.bg-dark .sign-in-content .error-message {
+  color: red;
 }
 
 .hero {
@@ -166,27 +219,6 @@ html body #root .main .bg-dark {
     font-size: 1.2rem;
   }
 }
-.input-remember {
-  display: flex;
-}
-.input-remember label {
-  margin-left: 0.25rem;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 1rem;
-}
-.input-wrapper label {
-  font-weight: bold;
-}
-.input-wrapper input {
-  padding: 5px;
-  font-size: 1.2rem;
-}
-
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -260,59 +292,6 @@ html body #root .main .bg-dark {
 .footer .footer-text {
   margin: 0;
   padding: 0;
-}
-
-.bg-dark {
-  background-color: #12002b;
-  padding-top: 1px;
-  padding-bottom: 15vh;
-}
-.bg-dark .sign-in-content {
-  box-sizing: border-box;
-  background-color: white;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 0px;
-  margin-top: 3rem;
-  padding: 2rem;
-}
-.bg-dark .sign-in-content .sign-in-icon {
-  font-size: 14px;
-}
-.bg-dark .sign-in-content .input-wrapper {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 1rem;
-}
-.bg-dark .sign-in-content .input-wrapper label {
-  font-weight: bold;
-}
-.bg-dark .sign-in-content .input-wrapper input {
-  padding: 5px;
-  font-size: 1.2rem;
-}
-.bg-dark .sign-in-content .input-remember {
-  display: flex;
-}
-.bg-dark .sign-in-content .input-remember label {
-  margin-left: 0.25rem;
-}
-.bg-dark .sign-in-content .sign-in-button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  background-color: #00bc77;
-  color: #fff;
-  text-decoration: underline white;
-  cursor: pointer;
-  border: none;
-}
-.bg-dark .sign-in-content .error-message {
-  color: red;
 }
 
 /*# sourceMappingURL=style.css.map */
