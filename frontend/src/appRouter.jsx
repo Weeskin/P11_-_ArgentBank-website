@@ -22,7 +22,7 @@ export default function AppRouter() {
 				/>
 				<Route
 					path="/Profile"
-					lement={<Profile />}
+					element={<Profile />}
 				/>
 				<Route
 					path="*"

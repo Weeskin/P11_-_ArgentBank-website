@@ -14,8 +14,7 @@ export default function Account({ title, amount, amountDescription }) {
 		</section>
 	);
 }
-
-PropTypes.Account = {
+Account.propTypes = {
 	title: PropTypes.string,
 	amount: PropTypes.string,
 	amountDescription: PropTypes.string

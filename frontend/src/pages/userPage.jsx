@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import User from "../components/User";
 import Account from "../components/Account";
 import AccountData from "../data/accounts.json";
-import { userProfile } from "../redux/actions/userActions";
+import { userProfile } from "../redux/Actions/userActions";
 
 export default function UserPage() {
 	const token = useSelector((state) => state.auth.token);
@@ -11,7 +11,7 @@ export default function UserPage() {
 
 	useEffect(() => {
 		if (!token) {
-			console.error("Token de connexion n'est pas retrouvé");
+			console.error("Le token de connexion n'est pas présent ou a expiré");
 			return;
 		}
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserName } from "../../redux/actions/userActions";
+import { updateUserName } from "../redux/Actions/userActions";
 
 export default function User() {
 	const token = useSelector((state) => state.auth.token);
@@ -42,11 +42,11 @@ export default function User() {
 		<div className="header">
 			{display ? (
 				<div>
-					<h2>
+					<h1>
 						Welcome back,
 						<br />
 						{userData.firstName} {userData.lastName} !
-					</h2>
+					</h1>
 					<button
 						className="edit-button"
 						onClick={() => setDisplay(!display)}

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from "../actions/typeActions";
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from "../Actions/typeActions";
 
 export const loginSuccess = (token) => {
 	return {
