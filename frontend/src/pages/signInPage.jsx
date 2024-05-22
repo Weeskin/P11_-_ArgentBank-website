@@ -1,5 +1,3 @@
-import "../assets/scss/signin.scss";
-
 export default function ConnexionPage() {
 	return (
 		<main className="main bg-dark">
