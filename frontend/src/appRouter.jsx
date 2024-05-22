@@ -3,8 +3,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/homePage";
 import SignInPage from "./pages/signInPage";
-// import Profile from "./pages/userPage";
-// import ErrorPage from "./pages/errorPage";
+import Profile from "./pages/userPage";
+import ErrorPage from "./pages/errorPage";
 import "./assets/css/style.css";
 
 export default function AppRouter() {
@@ -20,14 +20,14 @@ export default function AppRouter() {
 					path="/Login"
 					element={<SignInPage />}
 				/>
-				{/* <Route
+				<Route
 					path="/Profile"
 					lement={<Profile />}
 				/>
 				<Route
 					path="*"
 					element={<ErrorPage />}
-				/> */}
+				/>
 			</Routes>
 			<Footer />
 		</Router>

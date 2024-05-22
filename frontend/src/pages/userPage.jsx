@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import User from "../components/User";
+import Account from "../components/Account";
+import AccountData from "../data/accounts.json";
+import { userProfile } from "../redux/actions/userActions";
 
 export default function UserPage() {
 	const token = useSelector((state) => state.auth.token);
