@@ -1,10 +1,24 @@
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/Actions/authActions";
 import Logo from "../assets/img/argentBankLogo.webp";
 
 export default function Navbar() {
+	const isConnected = useSelector((state) => state.auth.token);
+	const userName = useSelector((state) => state.user.userData.userName);
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const HandleFaLogout = () => {
+		dispatch(logout());
+		localStorage.clear();
+		navigate("/");
+	};
+
 	return (
 		<header>
+			<h1 className="sr-only">Argent Bank</h1>
 			<nav className="main-nav">
 				<NavLink
 					to="/"
@@ -16,18 +30,40 @@ export default function Navbar() {
 						alt="Argent Bank Logo"
 					/>
 				</NavLink>
-				<div className="not-connected">
-					<NavLink
-						className="main-nav-item"
-						to="/login"
-					>
-						<i
-							className="fa fa-user-circle"
-							aria-hidden="true"
-						></i>
-						<p>Sign In</p>
-					</NavLink>
-				</div>
+				{isConnected ? (
+					<div className="connected">
+						<NavLink
+							className="main-nav-item"
+							to="/profile"
+						>
+							<i
+								className="fa fa-user-circle"
+								aria-hidden="true"
+							></i>
+							<p>{userName}</p>
+						</NavLink>
+						<NavLink
+							className="main-nav-item"
+							to="/"
+							onClick={HandleFaLogout}
+						>
+							<p>Sign Out</p>
+						</NavLink>
+					</div>
+				) : (
+					<div className="not-connected">
+						<NavLink
+							className="main-nav-item"
+							to="/login"
+						>
+							<i
+								className="fa fa-user-circle"
+								aria-hidden="true"
+							></i>
+							<p>Sign In</p>
+						</NavLink>
+					</div>
+				)}
 			</nav>
 		</header>
 	);

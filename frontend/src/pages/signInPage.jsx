@@ -41,6 +41,7 @@ export default function ConnexionPage() {
 			console.error(error);
 		}
 	};
+
 	return (
 		<main className="main bg-dark">
 			<section className="sign-in-content">
@@ -59,7 +60,7 @@ export default function ConnexionPage() {
 					<div className="imput-wrapper">
 						<label htmlFor="password">Password</label>
 						<input
-							type="text"
+							type="password"
 							id="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
