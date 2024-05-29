@@ -5,7 +5,7 @@ info:
   version: "1.0.0"
   termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
-basePath: /api/v1
+basePath: /api/v2
 schemes:
   - http
 paths:
@@ -101,171 +101,95 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/account:
-    post:
-      tags:
-        - User Account Module
-      summary: Create account
-      description: API for account creation
-      parameters:
-        - in: body
-          name: body
-          description: Account creation Payload
-          required: true
-          schema:
-            $ref: "#/definitions/Account"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Account created Successfully
-          schema:
-            $ref: "#/definitions/AccountResponse"
-        "400":
-          description: Invalid Field
-        "500":
-          description: Internal Server Error
-  /user/{:id}/accounts:
+  /account/{accountID}/transactions:
     get:
       tags:
-        - User Account Module
-      summary: Get user's account
-      description: API for getting user's account
+        - User Accounts and Transactions
+      summary: Account transactions
+      description: API for retrieving list of transactions assiocated with a choosed account
+      security:
+        - Bearer: []
       parameters:
-        - type: string
-          in: path
-          name: :id
-          description: User Account ID
+        - in: path
+          name: accountID
+          description: ID of an account
           required: true
-      produces:
-        - application/json
+          type: string
       responses:
         "200":
-          description: Accounts got Successfully
+          description: All transactions retrieved successfully
           schema:
-            $ref: "#/definitions/UserAccounts"
-        "400":
-          description: Invalid Field
+            type: array
+            items:
+              $ref: "#/definitions/TransactionsResponse"
+        "401":
+          description: Unauthorized user
+        "404":
+          description: Account not found
         "500":
           description: Internal Server Error
-  /user/account/{:id}:
-    get:
-      tags:
-        - User Account Module
-      summary: Get user's account
-      description: API for getting user's account
-      parameters:
-        - type: string
-          in: path
-          name: :id
-          description: User Account ID
-          required: true
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Account got Successfully
-          schema:
-            $ref: "#/definitions/AccountResponse"
-        "400":
-          description: Invalid Field
-        "500":
-          description: Internal Server Error
-  /user/account/transaction:
-    post:
-      tags:
-        - User Account Transactions Module
-      summary: Create user's account transaction
-      description: API for creating user's account transaction
-      parameters:
-        - in: body
-          name: body
-          description: Transaction creation Payload
-          required: true
-          schema:
-            $ref: "#/definitions/UserAccountTransaction"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Transaction created Successfully
-          schema:
-            $ref: "#/definitions/TransactionResponse"
-        "400":
-          description: Invalid Field
-        "500":
-          description: Internal Server Error
-  /user/account/{:id}/transactions:
-    get:
-      tags:
-        - User Account Transactions Module
-      summary: Get one user account's transactions
-      description: API for getting one user account's transactions
-      parameters:
-        - type: string
-          in: path
-          name: :id
-          description: User Account ID
-          required: true
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Transactions got Successfully
-          schema:
-            $ref: "#/definitions/UserAccountTransactions"
-        "400":
-          description: Invalid Field
-        "500":
-          description: Internal Server Error
-  /user/account/transaction/{:id}:
-    get:
-      tags:
-        - User Account Transactions Module
-      summary: Get one user account's particular transaction
-      description: API for getting one user account's particular transaction
-      parameters:
-        - type: string
-          in: path
-          name: :id
-          description: Transaction ID
-          required: true
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Transaction got Successfully
-          schema:
-            $ref: "#/definitions/TransactionResponse"
-        "400":
-          description: Invalid Field
-        "500":
-          description: Internal Server Error
-  /user/account/updatetransaction:
+  /transactions/{transactionID}/category:
     put:
       tags:
-        - User Account Transactions Module
-      summary: Update one user account's particular transaction
-      description: API for updateing one user account's particular transaction
+        - User Accounts and Transactions
+      summary: Update transaction's category
+      description: API for updating category of transaction
+      security:
+        - Bearer: []
       parameters:
+        - in: path
+          name: transactionID
+          description: ID of a transaction
+          required: true
+          type: string
         - in: body
-          name: body
-          description: Transaction update Payload
+          name: category
+          description: Modified transaction's category
           required: true
           schema:
-            $ref: "#/definitions/UpdateTransaction"
-      produces:
-        - application/json
+            $ref: "#/definitions/TransactionCategory"
       responses:
         "200":
-          description: Transaction updated Successfully
+          description: Transaction's category modified successfully
           schema:
-            $ref: "#/definitions/TransactionResponse"
-        "400":
-          description: Invalid Field
+            $ref: "#/definitions/TransactionCategory"
+        "401":
+          description: Unauthorized user
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Servor Error
+  /transactions/{transactionID}/note:
+    post:
+      tags:
+        - User Accounts and Transactions
+      summary: Add transaction's note
+      description: API for adding a note to a transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: ID of a transaction
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: New transaction's note
+          required: false
+          schema:
+            $ref: "#/definitions/TransactionNote"
+      responses:
+        "200":
+          description: Note added to the transaction successfully
+          schema:
+            $ref: "#/definitions/TransactionResponseNote"
+        "401":
+          description: Unauthorized user
+        "404":
+          description: Note not created
         "500":
           description: Internal Server Error
-
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -321,154 +245,66 @@ definitions:
     properties:
       userName:
         type: string
-  Account:
-    properties:
-      accountType:
-        type: number
-        description: Type of account
-      userId:
-        type: string
-        description: user id
-      creationDate:
-        type: string
-        description: creation date
-      name:
-        type: string
-        description: Account name
-      balance:
-        type: number
-        description: Account balance
   AccountResponse:
     type: object
     properties:
-      status:
-        type: integer
-      message:
+      accountID:
         type: string
-      body:
-        type: object
-        properties:
-          _id:
-            type: string
-          accountType:
-            type: number
-          userId:
-            type: string
-          creationDate:
-            type: string
-          name:
-            type: string
-          balance:
-            type: number
-  UserAccounts:
-    type: object
-    properties:
-      status:
-        type: integer
-        example: 200
-      message:
+        description: account ID
+      accountName:
         type: string
-        example: Success !
-      body:
-        type: array
-        items:
-          type: object
-          properties:
-            _id:
-              type: string
-            accountType:
-              type: number
-            userId:
-              type: string
-            creationDate:
-              type: string
-            name:
-              type: string
-            balance:
-              type: number
-  UserAccountTransaction:
-    properties:
-      accountId:
+        description: account name
+      accountCurrency:
         type: string
-      creationDate:
-        type: string
-      description:
-        type: string
+        description: account currency
       amount:
         type: number
+        description: current account balance
+        format: double
+      amountDescription:
+        type: string
+        description: account availability
+  TransactionsResponse:
+    type: object
+    properties:
+      transactionID:
+        type: string
+        description: transaction ID
+      transactionType:
+        type: string
+        description: type of transaction
+      date:
+        type: string
+        format: date-time
+        description: date of transaction
+      description:
+        type: string
+        description: description of transaction
+      amount:
+        type: number
+        description: transaction amout
       balance:
         type: number
-      transactionType:
-        type: number
-      transactionCategory:
-        type: number
-      notes:
+        description: available balance
+        format: double
+      category:
         type: string
-  TransactionResponse:
+        description: name of the category
+      note:
+        type: string
+        description: user note attached to the transaction
+  TransactionCategory:
     type: object
     properties:
-      status:
-        type: integer
-      message:
+      category:
         type: string
-      body:
-        type: object
-        properties:
-          _id:
-            type: string
-          accountId:
-            type: string
-          creationDate:
-            type: string
-          description:
-            type: string
-          amount:
-            type: number
-          balance:
-            type: number
-          transactionType:
-            type: number
-          transactionCategory:
-            type: number
-          notes:
-            type: string
-  UserAccountTransactions:
+  TransactionNote:
     type: object
     properties:
-      status:
-        type: integer
-        example: 200
-      message:
+      note:
         type: string
-        example: Success !
-      body:
-        type: array
-        items:
-          type: object
-          properties:
-            _id:
-              type: string
-            accountId:
-              type: string
-            creationDate:
-              type: string
-            description:
-              type: string
-            amount:
-              type: number
-            balance:
-              type: number
-            transactionType:
-              type: number
-            transactionCategory:
-              type: number
-            notes:
-              type: string
-  UpdateTransaction:
+  TransactionResponseNote:
+    type: object
     properties:
-      _id:
-        type: string
-      transactionCategory:
-        type: number
-      notes:
+      note:
         type: string
