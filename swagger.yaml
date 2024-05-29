@@ -8,6 +8,11 @@ host: localhost:3001
 basePath: /api/v2
 schemes:
   - http
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
   /user/login:
     post:
@@ -33,6 +38,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
+
   /user/signup:
     post:
       tags:
@@ -57,6 +63,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
+
   /user/profile:
     post:
       security:
@@ -65,48 +72,24 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-      # - application/json
-      responses:
-        "200":
-          description: User profile retrieved successully
-          schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
-          description: Invalid Fields
-        "500":
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating a user profile
-      parameters:
-        - in: body
-          name: body
-          description: Update user profile attributes
-          required: true
-          schema:
-            $ref: "#/definitions/UserProfile"
       produces:
         - application/json
       responses:
         "200":
-          description: User profile retrieved successully
+          description: Profile retrieved successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
-          description: Invalid Fields
+            $ref: "#/definitions/UserProfile"
+        "401":
+          description: Unauthorized user
         "500":
           description: Internal Server Error
-  /account/{accountID}/transactions:
+
+  /transactions/{accountID}:
     get:
       tags:
         - User Accounts and Transactions
       summary: Account transactions
-      description: API for retrieving list of transactions assiocated with a choosed account
+      description: API for retrieving list of transactions associated with a chosen account
       security:
         - Bearer: []
       parameters:
@@ -115,6 +98,8 @@ paths:
           description: ID of an account
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         "200":
           description: All transactions retrieved successfully
@@ -128,12 +113,40 @@ paths:
           description: Account not found
         "500":
           description: Internal Server Error
-  /transactions/{transactionID}/category:
+
+  /transactions/{transactionID}:
+    get:
+      tags:
+        - User Accounts and Transactions
+      summary: Retrieve a specific transaction
+      description: API for retrieving a specific transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: ID of a transaction
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction retrieved successfully
+          schema:
+            $ref: "#/definitions/TransactionsResponse"
+        "401":
+          description: Unauthorized user
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+
     put:
       tags:
         - User Accounts and Transactions
       summary: Update transaction's category
-      description: API for updating category of transaction
+      description: API for updating transaction
       security:
         - Bearer: []
       parameters:
@@ -148,6 +161,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/TransactionCategory"
+      produces:
+        - application/json
       responses:
         "200":
           description: Transaction's category modified successfully
@@ -158,69 +173,38 @@ paths:
         "404":
           description: Transaction not found
         "500":
-          description: Internal Servor Error
-  /transactions/{transactionID}/note:
-    post:
-      tags:
-        - User Accounts and Transactions
-      summary: Add transaction's note
-      description: API for adding a note to a transaction
-      security:
-        - Bearer: []
-      parameters:
-        - in: path
-          name: transactionID
-          description: ID of a transaction
-          required: true
-          type: string
-        - in: body
-          name: note
-          description: New transaction's note
-          required: false
-          schema:
-            $ref: "#/definitions/TransactionNote"
-      responses:
-        "200":
-          description: Note added to the transaction successfully
-          schema:
-            $ref: "#/definitions/TransactionResponseNote"
-        "401":
-          description: Unauthorized user
-        "404":
-          description: Note not created
-        "500":
           description: Internal Server Error
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
+
 definitions:
   User:
+    type: object
     properties:
       email:
         type: string
-        description: user email
+        description: User email
       password:
         type: string
-        description: user password
+        description: User password
       firstName:
         type: string
-        description: user first name
+        description: User first name
       lastName:
         type: string
-        description: user last name
+        description: User last name
       userName:
         type: string
-        description: user public name
+        description: User public name
+
   Login:
+    type: object
     properties:
       email:
         type: string
-        description: user email
+        description: User email
       password:
         type: string
-        description: user password
+        description: User password
+
   ApiResponse:
     type: object
     properties:
@@ -235,76 +219,116 @@ definitions:
             type: string
           email:
             type: string
+
   LoginResponse:
     type: object
     properties:
       token:
         type: string
+
   UserProfile:
     type: object
     properties:
       userName:
         type: string
+
   AccountResponse:
     type: object
     properties:
       accountID:
         type: string
-        description: account ID
+        description: Account ID
       accountName:
         type: string
-        description: account name
+        description: Account name
       accountCurrency:
         type: string
-        description: account currency
+        description: Account currency
       amount:
         type: number
-        description: current account balance
+        description: Current account balance
         format: double
       amountDescription:
         type: string
-        description: account availability
+        description: Account availability
+
   TransactionsResponse:
     type: object
     properties:
       transactionID:
         type: string
-        description: transaction ID
+        description: Transaction ID
       transactionType:
         type: string
-        description: type of transaction
+        description: Type of transaction
       date:
         type: string
         format: date-time
-        description: date of transaction
+        description: Date of transaction
       description:
         type: string
-        description: description of transaction
+        description: Description of transaction
       amount:
         type: number
-        description: transaction amout
+        description: Transaction amount
       balance:
         type: number
-        description: available balance
         format: double
+        description: Available balance
       category:
         type: string
-        description: name of the category
+        description: Name of the category
       note:
         type: string
-        description: user note attached to the transaction
+        description: User note attached to the transaction
+
   TransactionCategory:
     type: object
     properties:
       category:
         type: string
+
   TransactionNote:
     type: object
     properties:
       note:
         type: string
+
   TransactionResponseNote:
     type: object
     properties:
       note:
         type: string
+
+  UserAccountTransactions:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+      message:
+        type: string
+        example: Success!
+      body:
+        type: array
+        items:
+          type: object
+          properties:
+            _id:
+              type: string
+            accountId:
+              type: string
+            creationDate:
+              type: string
+            description:
+              type: string
+            amount:
+              type: number
+            balance:
+              type: number
+            transactionType:
+              type: number
+            transactionCategory:
+              type: number
+            notes:
+              type: string

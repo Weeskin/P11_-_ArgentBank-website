@@ -5,9 +5,18 @@ import HomePage from "./pages/homePage";
 import SignInPage from "./pages/signInPage";
 import Profile from "./pages/userPage";
 import ErrorPage from "./pages/errorPage";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "./redux/Actions/authActions";
 import "./assets/css/style.css";
 
 export default function AppRouter() {
+	const dispatch = useDispatch();
+	const token = localStorage.getItem("token");
+
+	if (token) {
+		dispatch(loginSuccess(token));
+	}
+
 	return (
 		<Router>
 			<Navbar />
