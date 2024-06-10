@@ -285,7 +285,18 @@ definitions:
   TransactionCategory:
     type: object
     properties:
+      name:
+        type: string
+      amount:
+        type: number
+        description: Transaction amount
+      balance:
+        type: number
+        format: double
+        description: Available balance
       category:
+        type: string
+      note:
         type: string
 
   TransactionNote:
