@@ -4,11 +4,6 @@
 Je viens d'intégrer Argant Bank comme développeur front-end. Argent Bank est une nouvelle banque en ligne qui souhaite percer dans le secteur bancaire. Je dois Créer une application Web permettant aux clients d'Argent Bank de se connecter et de gérer leurs comptes et profils.
 
 
-## Demo
-
-![argentbankcover](backend/designs/img/Argent Bank.png)
-
-
 ## Objectifs
 
 ### Installer l'application en local
