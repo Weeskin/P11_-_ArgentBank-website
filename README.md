@@ -1,5 +1,5 @@
 # Argent Bank
-### OpenClassrooms P11 - Optimisez le référencement d'un site de photographe
+### OpenClassrooms P11
 
 Je viens d'intégrer Argant Bank comme développeur front-end. Argent Bank est une nouvelle banque en ligne qui souhaite percer dans le secteur bancaire. Je dois Créer une application Web permettant aux clients d'Argent Bank de se connecter et de gérer leurs comptes et profils.
 
