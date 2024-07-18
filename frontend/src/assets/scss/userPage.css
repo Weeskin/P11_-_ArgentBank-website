@@ -1,0 +1,49 @@
+.profile-page {
+  flex: 1;
+  background-color: #12002b;
+}
+.profile-page .header {
+  color: white;
+  margin-bottom: 2rem;
+}
+.profile-page .header h1 {
+  font-size: 2rem;
+}
+.profile-page .header .edit-button {
+  background-color: #00bc77;
+  border-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  padding: 0.625rem;
+}
+.profile-page .header .edit-input {
+  margin: 10px 0 10px 0;
+}
+.profile-page .header .edit-input label {
+  padding-right: 10px;
+}
+.profile-page .header .edit-input input {
+  height: 30px;
+  font-size: 1rem;
+}
+.profile-page .header .edit-input #firstName,
+.profile-page .header .edit-input #lastName {
+  background-color: rgb(213, 213, 213);
+}
+.profile-page .header .edit-username-button-save {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 50px 10px 50px;
+  margin: 20px 15px 0 0;
+}
+.profile-page .header .edit-username-button-cancel {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 50px 10px 50px;
+  margin: 20px 0 0 0;
+}/*# sourceMappingURL=userPage.css.map */
